@@ -48,6 +48,14 @@
       <artifactId>spring-boot-starter-validation</artifactId>
     </dependency>
 
+    <!-- This is to make it so you can reload automatically -->
+    <!--<dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <scope>runtime</scope>
+      <optional>true</optional>
+    </dependency>-->
+
     <!-- AWS SDK v2 for S3 -->
     <dependency>
       <groupId>software.amazon.awssdk</groupId>
