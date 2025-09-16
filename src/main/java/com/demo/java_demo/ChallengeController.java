@@ -14,27 +14,44 @@ public class ChallengeController
     }
 
     @GetMapping("/challenges")
-    public String view(Model model) {
-        model.addAttribute("result", "");
+     public String viewChallenges(Model model) {
+        // Initialize an empty result for the first page load
+        model.addAttribute("twoSumResult", "");
+        model.addAttribute("reverseStringResult", "");
         return "challenges";
     }
 
-    @PostMapping("/challenges/two-sum")
-    public String twoSum(@RequestParam String numbers, 
-                         @RequestParam int target, 
-                         Model model) {
-        String[] parts = numbers.split("\\s*,\\s*");
-        int[] arr = new int[parts.length];
-        for (int i = 0; i < parts.length; i++) arr[i] = Integer.parseInt(parts[i]);
+     @PostMapping("/challenges/two-sum")
+    public String twoSum(@RequestParam String numbers,
+                         @RequestParam int target,
+                         Model model,
+                         @RequestParam(required = false, defaultValue = "") String reverseStringResult) {
+        try {
+            String[] parts = numbers.split("\\s*,\\s*");
+            int[] arr = new int[parts.length];
+            for (int i = 0; i < parts.length; i++) {
+                arr[i] = Integer.parseInt(parts[i].trim());
+            }
+            
+            var res = challengeService.twoSum(arr, target);
+            model.addAttribute("twoSumResult", res.isEmpty() ? "No solution found." : "Indices: " + res);
+        } catch (NumberFormatException e) {
+            model.addAttribute("twoSumResult", "Invalid number format. Please enter comma-separated integers.");
+        }
 
-        var res = challengeService.twoSum(arr, target);
-        model.addAttribute("result", res.isEmpty() ? "No solution" : "Indices: " + res);
-        return "challenge";
+        // Keep existing results to display both on the same page
+        model.addAttribute("reverseStringResult", reverseStringResult); 
+        return "challenges";
     }
-    
-    @PostMapping("/challenge/reverse")
-    public String reverse(@RequestParam String text, Model model) {
-        model.addAttribute("result", challengeService.reverseString(text));
-        return "challenge";
+
+    @PostMapping("/challenges/reverse")
+    public String reverse(@RequestParam String text, 
+                          Model model,
+                          @RequestParam(required = false, defaultValue = "") String twoSumResult) {
+        model.addAttribute("reverseStringResult", challengeService.reverseString(text));
+
+        // Keep existing results to display both on the same page
+        model.addAttribute("twoSumResult", twoSumResult);
+        return "challenges";
     }
 }
