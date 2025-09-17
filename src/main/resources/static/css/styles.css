@@ -15,3 +15,6 @@ body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui, -app
 .btn{padding:10px 14px;border:0;border-radius:10px;background:var(--brand);color:#fff;cursor:pointer}
 .btn.secondary{background:#0f172a10;color:var(--fg)}
 footer{margin:40px 0 20px;color:var(--muted);text-align:center}
+.text-center {
+  text-align: center;
+}

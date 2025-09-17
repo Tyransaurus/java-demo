@@ -20,7 +20,7 @@ public class HomeController
     {
         model.addAttribute("page", "home");
         model.addAttribute("title", "DJ's Java Demo");
-        model.addAttribute("message", "Hello from Spring Boot!");
+        model.addAttribute("message", "This is a demo to demonstrate Java skills and AWS server services.");
         model.addAttribute("banner", bannerService.readBanner());
         return ("index"); // this goes to look for templates 
     }

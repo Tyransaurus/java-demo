@@ -18,10 +18,10 @@
   <!-- Main content -->
   <main class="container">
     <div class="card">
-      <h1 class="h1" th:text="${title}">Java Demo</h1>
-      <p class="muted" th:text="${message}">Default message</p>
+      <h1 class="h1 text-center" th:text="${title}">Java Demo</h1>
+      <p class="muted text-center" th:text="${message}">Default message</p>
 
-      <h3>Banner (from S3)</h3>
+      <h3>Banner (This banner is controlled by a text file in S3 and you can retroactively update it.)</h3>
       <p><strong th:text="${banner}">Default banner</strong></p>
 
       <div class="row">

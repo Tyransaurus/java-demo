@@ -49,12 +49,12 @@
     </dependency>
 
     <!-- This is to make it so you can reload automatically -->
-    <!--<dependency>
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
       <scope>runtime</scope>
       <optional>true</optional>
-    </dependency>-->
+    </dependency>
 
     <!-- AWS SDK v2 for S3 -->
     <dependency>
