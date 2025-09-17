@@ -16,6 +16,7 @@ public class ChallengeController
     @GetMapping("/challenges")
      public String viewChallenges(Model model) {
         // Initialize an empty result for the first page load
+        model.addAttribute("page", "challenges");
         model.addAttribute("twoSumResult", "");
         model.addAttribute("reverseStringResult", "");
         return "challenges";

@@ -23,6 +23,7 @@ public class S3Controller {
 
        @GetMapping("/s3")
     public String view(Model model) {
+        model.addAttribute("page", "s3");
         model.addAttribute("objects", s3.listObjects(bucket));
         return "s3";
     }

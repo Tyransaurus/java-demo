@@ -1,23 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title th:text="${title}">Java Demo</title>
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-  <h2>Banner (from S3)</h2>
-  <p><span th:text="${banner}">Default banner</span></p>
-  
-  <h1 th:text="${title}">Java Demo</h1>
-  <p th:text="${message}">Default message</p>
-  <p><a href="/challenges">Go to Coding Challenges</a></p>
+
+  <!-- Navigation -->
+  <header class="nav">
+    <a th:href="@{/}" th:classappend="${page}=='home' ? ' active'">Home</a>
+    <a th:href="@{/challenges}" th:classappend="${page}=='challenges' ? ' active'">Challenges</a>
+    <a th:href="@{/s3}" th:classappend="${page}=='s3' ? ' active'">S3</a>
+  </header>
+
+  <!-- Main content -->
+  <main class="container">
+    <div class="card">
+      <h1 class="h1" th:text="${title}">Java Demo</h1>
+      <p class="muted" th:text="${message}">Default message</p>
+
+      <h3>Banner (from S3)</h3>
+      <p><strong th:text="${banner}">Default banner</strong></p>
+
+      <div class="row">
+        <form action="/admin/banner" method="post" class="row" style="flex:1">
+          <input class="input" name="text" placeholder="New banner text" required>
+          <button class="btn">Update</button>
+        </form>
+        <form action="/admin/banner/refresh" method="post">
+          <button class="btn secondary">Refresh</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <small>© 2025 DJ • Spring Boot + AWS S3 Demo</small>
+  </footer>
+
 </body>
-
-<form action="/admin/banner" method="post">
-  <input name="text" placeholder="New banner text" required />
-  <button>Update Banner</button>
-</form>
-
-<p><a href="/s3">Upload a file to S3</a></p>
-
 </html>

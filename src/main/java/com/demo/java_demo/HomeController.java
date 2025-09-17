@@ -18,6 +18,7 @@ public class HomeController
     @GetMapping("/")
     public String index(Model model)
     {
+        model.addAttribute("page", "home");
         model.addAttribute("title", "DJ's Java Demo");
         model.addAttribute("message", "Hello from Spring Boot!");
         model.addAttribute("banner", bannerService.readBanner());

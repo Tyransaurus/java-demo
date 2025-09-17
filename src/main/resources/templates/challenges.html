@@ -2,45 +2,57 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Coding Challenges</title>
-  <style>
-    body { font-family: system-ui, sans-serif; margin: 2rem; }
-    .card { border: 1px solid #ddd; padding: 1rem; border-radius: 12px; margin-bottom: 1rem; }
-    .result { margin-top: .5rem; font-weight: 600; }
-    form { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
-    input[type="text"], input[type="number"] { padding: .4rem .6rem; }
-    button { padding: .4rem .8rem; cursor: pointer; }
-    a { text-decoration: none; }
-  </style>
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-  <h1>Coding Challenges</h1>
 
-  <div class="card">
-    <h3>Two Sum</h3>
-    <p>This returns the first two array positions of numbers that add up to the target.</p>
-    <form action="/challenges/two-sum" method="post">
-      <label>Numbers:</label>
-      <input name="numbers" type="text" placeholder="e.g., 2,7,11,15" required />
-      <label>Target:</label>
-      <input name="target" type="number" placeholder="e.g., 9" required />
-      <input type="hidden" name="reverseStringResult" th:value="${reverseStringResult}" />
-      <button>Solve</button>
-    </form>
-    <div class="result" th:text="${twoSumResult}"></div>
-  </div>
+  <!-- Navigation -->
+  <header class="nav">
+    <a th:href="@{/}" th:classappend="${page}=='home' ? ' active'">Home</a>
+    <a th:href="@{/challenges}" th:classappend="${page}=='challenges' ? ' active'">Challenges</a>
+    <a th:href="@{/s3}" th:classappend="${page}=='s3' ? ' active'">S3</a>
+  </header>
 
-  <div class="card">
-    <h3>Reverse String</h3>
-    <p>This reverses a string.</p>
-    <form action="/challenges/reverse" method="post">
-      <input name="text" type="text" placeholder="Type text…" required />
-      <input type="hidden" name="twoSumResult" th:value="${twoSumResult}" />
-      <button>Reverse</button>
-    </form>
-    <div class="result" th:text="${reverseStringResult}"></div>
-  </div>
+  <main class="container">
+    <div class="card">
+      <h1 class="h1">Coding Challenges</h1>
 
-  <p><a href="/">← Back to Home</a></p>
+      <!-- Two Sum -->
+      <section class="card">
+        <h3>Two Sum</h3>
+        <p class="muted">Finds the first pair of numbers that sum to the target.</p>
+        <form action="/challenges/two-sum" method="post" class="row">
+          <input class="input" name="numbers" type="text" placeholder="e.g., 1,2,3,4,5,6,8,9,10,11" required style="flex:2">
+          <input class="input" name="target" type="number" placeholder="Target (e.g., 11)" required style="flex:1">
+          <!-- keep reverse result across requests -->
+          <input type="hidden" name="reverseStringResult" th:value="${reverseStringResult}">
+          <button class="btn" style="flex:0">Solve</button>
+        </form>
+        <div class="alert" th:text="${twoSumResult}"></div>
+      </section>
+
+      <!-- Reverse String -->
+      <section class="card">
+        <h3>Reverse String</h3>
+        <p class="muted">Reverses your input text.</p>
+        <form action="/challenges/reverse" method="post" class="row">
+          <input class="input" name="text" type="text" placeholder="Type text…" required style="flex:1">
+          <!-- keep two-sum result across requests -->
+          <input type="hidden" name="twoSumResult" th:value="${twoSumResult}">
+          <button class="btn" style="flex:0">Reverse</button>
+        </form>
+        <div class="alert" th:text="${reverseStringResult}"></div>
+      </section>
+
+      <a href="/" class="btn secondary">← Back to Home</a>
+    </div>
+  </main>
+
+  <footer>
+    <small>© 2025 DJ • Spring Boot + AWS S3 Demo</small>
+  </footer>
+
 </body>
 </html>

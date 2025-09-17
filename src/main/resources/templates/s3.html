@@ -2,33 +2,52 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>S3 Upload</title>
-  <style>
-    body { font-family: system-ui, sans-serif; margin: 2rem; }
-    .card { border: 1px solid #ddd; padding: 1rem; border-radius: 12px; max-width: 560px; }
-    .msg { margin-top: .75rem; font-weight: 600; }
-    ul { margin-top: 1rem; padding-left: 1.2rem; }
-  </style>
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-  <h1>Upload a file to S3</h1>
-  <div class="card">
-    <form action="/s3/upload" method="post" enctype="multipart/form-data">
-      <input type="file" name="file" required />
-      <button>Upload</button>
-    </form>
-    <div class="msg" th:if="${message}" th:text="${message}"></div>
-  </div>
 
-  <h2>Objects in Bucket</h2>
-  <ul>
-    <li th:if="${objects == null or #lists.isEmpty(objects)}">(Bucket is empty)</li>
-    <li th:each="k : ${objects}">
-      <span th:text="${k}">filename</span>
-      — <a th:href="@{/s3/download(key=${k})}">Download</a>
-    </li>
-  </ul>
+  <!-- Navigation -->
+  <header class="nav">
+    <a th:href="@{/}" th:classappend="${page}=='home' ? ' active'">Home</a>
+    <a th:href="@{/challenges}" th:classappend="${page}=='challenges' ? ' active'">Challenges</a>
+    <a th:href="@{/s3}" th:classappend="${page}=='s3' ? ' active'">S3</a>
+  </header>
 
-  <p style="margin-top:1rem;"><a href="/">← Back to Home</a></p>
+  <main class="container">
+    <div class="card">
+      <h1 class="h1">S3 Upload</h1>
+
+      <!-- Upload -->
+      <section class="card">
+        <h3>Upload a file to your bucket</h3>
+        <form action="/s3/upload" method="post" enctype="multipart/form-data" class="row">
+          <input type="file" name="file" class="input" required style="flex:1">
+          <button class="btn" style="flex:0">Upload</button>
+        </form>
+        <div class="alert" th:if="${message}" th:text="${message}"></div>
+      </section>
+
+      <!-- List objects -->
+      <section class="card">
+        <h3>Objects in Bucket</h3>
+        <ul class="list">
+          <li th:if="${objects == null or #lists.isEmpty(objects)}" class="muted">(Bucket is empty)</li>
+          <li th:each="k : ${objects}">
+            <span th:text="${k}">filename</span>
+            <a th:href="@{/s3/download(key=${k})}" class="btn secondary">Download</a>
+          </li>
+        </ul>
+      </section>
+
+      <a href="/" class="btn secondary">← Back to Home</a>
+    </div>
+  </main>
+
+  <footer>
+    <small>© 2025 DJ • Spring Boot + AWS S3 Demo</small>
+  </footer>
+
 </body>
 </html>
