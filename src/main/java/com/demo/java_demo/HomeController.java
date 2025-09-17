@@ -32,8 +32,8 @@ public class HomeController
         return "redirect:/";
     }
     
-    @PostMapping("/admin/banner/refresh")
-    public String refreshBanner() {
+    @PostMapping("/admin/banner/reset")
+    public String resetBanner() {
         bannerService.resetBanner();
         return "redirect:/";
     }
