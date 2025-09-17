@@ -37,4 +37,13 @@ public class S3StorageService
                 .build();
         s3.putObject(req, RequestBody.fromString(text, StandardCharsets.UTF_8));
     }
+
+    public void uploadBytes(String bucket, String key, byte[] data, String contentType) {
+        var req = PutObjectRequest.builder()
+                .bucket(bucket)
+                .key(key)
+                .contentType(contentType)
+                .build();
+        s3.putObject(req, RequestBody.fromBytes(data));
+    }
 }

@@ -1,0 +1,24 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>S3 Upload</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 2rem; }
+    .card { border: 1px solid #ddd; padding: 1rem; border-radius: 12px; max-width: 560px; }
+    .msg { margin-top: .75rem; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <h1>Upload a file to S3</h1>
+  <div class="card">
+    <form action="/s3/upload" method="post" enctype="multipart/form-data">
+      <input type="file" name="file" required />
+      <button>Upload</button>
+    </form>
+    <div class="msg" th:if="${message}" th:text="${message}"></div>
+  </div>
+
+  <p style="margin-top:1rem;"><a href="/">← Back to Home</a></p>
+</body>
+</html>
