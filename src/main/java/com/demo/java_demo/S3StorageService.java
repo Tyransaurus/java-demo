@@ -7,6 +7,8 @@ import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
+import software.amazon.awssdk.services.s3.model.ListObjectsV2Request;
+import software.amazon.awssdk.services.s3.model.S3Object;
 
 import java.nio.charset.StandardCharsets;
 
@@ -45,5 +47,24 @@ public class S3StorageService
                 .contentType(contentType)
                 .build();
         s3.putObject(req, RequestBody.fromBytes(data));
+    }
+
+    public java.util.List<String> listObjects(String bucket) {
+        var req = ListObjectsV2Request.builder()
+            .bucket(bucket)
+            .maxKeys(100)        // adjust as you like
+            .build();
+        var resp = s3.listObjectsV2(req);
+        java.util.List<String> keys = new java.util.ArrayList<>();
+        for (S3Object obj : resp.contents()) {
+            keys.add(obj.key());
+        }
+        return keys;
+    }
+
+    // Optional: helper to download bytes 
+    public byte[] getBytes(String bucket, String key) {
+        var get = GetObjectRequest.builder().bucket(bucket).key(key).build();
+        return s3.getObjectAsBytes(get).asByteArray();
     }
 }

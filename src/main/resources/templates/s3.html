@@ -7,6 +7,7 @@
     body { font-family: system-ui, sans-serif; margin: 2rem; }
     .card { border: 1px solid #ddd; padding: 1rem; border-radius: 12px; max-width: 560px; }
     .msg { margin-top: .75rem; font-weight: 600; }
+    ul { margin-top: 1rem; padding-left: 1.2rem; }
   </style>
 </head>
 <body>
@@ -18,6 +19,15 @@
     </form>
     <div class="msg" th:if="${message}" th:text="${message}"></div>
   </div>
+
+  <h2>Objects in Bucket</h2>
+  <ul>
+    <li th:if="${objects == null or #lists.isEmpty(objects)}">(Bucket is empty)</li>
+    <li th:each="k : ${objects}">
+      <span th:text="${k}">filename</span>
+      — <a th:href="@{/s3/download(key=${k})}">Download</a>
+    </li>
+  </ul>
 
   <p style="margin-top:1rem;"><a href="/">← Back to Home</a></p>
 </body>
