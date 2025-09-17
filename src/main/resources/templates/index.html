@@ -25,12 +25,12 @@
       <p class="text-center"><strong th:text="${banner}">Default banner</strong></p>
 
       <div class="row">
-        <form action="/admin/banner/refresh" method="post" class="row" style="flex:1">
-          <button class="btn">Reset</button>
-        </form>
-        <form action="/admin/banner" method="post">
+        <form action="/admin/banner" method="post" class="row" style="flex:1">
           <input class="input" name="text" placeholder="New banner text" required>
-          <button class="btn secondary">Update</button>
+          <button class="btn">Update</button>
+        </form>
+        <form action="/admin/banner/refresh" method="post">
+          <button class="btn secondary">Refresh</button>
         </form>
       </div>
     </div>
