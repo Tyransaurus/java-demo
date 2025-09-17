@@ -33,8 +33,9 @@ public class HomeController
     }
     
     @PostMapping("/admin/banner/refresh")
-    public String refresh() {
-        // just redirect to "/" so the page re-renders and re-reads S3
-    return "redirect:/";
+    public String refreshBanner() {
+        bannerService.resetBanner();
+        return "redirect:/";
+    }
 }
-}
+

@@ -30,4 +30,9 @@ public class BannerService
         s3.putText(bucket, bannerKey, text);
     }
 
+    public void resetBanner() {
+        String original = s3.getText(bucket, bannerKey.replace(".txt", "-original.txt"));
+        s3.putText(bucket, bannerKey, original);
+    }
+
 }
