@@ -5,8 +5,17 @@
   <title th:text="${title}">Java Demo</title>
 </head>
 <body>
+  <h2>Banner (from S3)</h2>
+  <p><span th:text="${banner}">Default banner</span></p>
+  
   <h1 th:text="${title}">Java Demo</h1>
   <p th:text="${message}">Default message</p>
   <p><a href="/challenges">Go to Coding Challenges</a></p>
 </body>
+
+<form action="/admin/banner" method="post">
+  <input name="text" placeholder="New banner text" required />
+  <button>Update Banner</button>
+</form>
+
 </html>
