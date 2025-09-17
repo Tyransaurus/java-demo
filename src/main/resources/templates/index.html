@@ -21,8 +21,8 @@
       <h1 class="h1 text-center" th:text="${title}">Java Demo</h1>
       <p class="muted text-center" th:text="${message}">Default message</p>
 
-      <h3>Banner (This banner is controlled by a text file in S3 and you can retroactively update it.)</h3>
-      <p><strong class= "text-center" th:text="${banner}">Default banner</strong></p>
+      <h3 class="text-center">Banner (This banner is controlled by a text file in S3 and you can retroactively update it.)</h3>
+      <p class="text-center"><strong th:text="${banner}">Default banner</strong></p>
 
       <div class="row">
         <form action="/admin/banner" method="post" class="row" style="flex:1">
