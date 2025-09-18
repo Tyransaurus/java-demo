@@ -36,7 +36,7 @@
           <li th:if="${objects == null or #lists.isEmpty(objects)}" class="muted">(Bucket is empty)</li>
           <li th:each="k : ${objects}">
             <span th:text="${k}">filename</span>
-            <a th:href="@{/s3/download(key=${k})}" class="btn secondary">Download</a>
+            <a th:href="@{/s3/download(key=${k})}" class="float-right">Download</a>
           </li>
         </ul>
       </section>

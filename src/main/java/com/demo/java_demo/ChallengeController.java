@@ -35,7 +35,7 @@ public class ChallengeController
             }
             
             var res = challengeService.twoSum(arr, target);
-            model.addAttribute("twoSumResult", res.isEmpty() ? "No solution found." : "Indices: " + res);
+            model.addAttribute("twoSumResult", res.isEmpty() ? "No solution found." : "Array Numbers: " + res);
         } catch (NumberFormatException e) {
             model.addAttribute("twoSumResult", "Invalid number format. Please enter comma-separated integers.");
         }
