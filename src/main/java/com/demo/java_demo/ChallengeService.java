@@ -84,7 +84,7 @@ public class ChallengeService
         return best;
     }
 
-    // Merge Intervals: O(n log n)
+    // Merge Intervals
     public List<int[]> mergeIntervals(List<int[]> intervals) {
         if (intervals == null || intervals.isEmpty()) return List.of();
         intervals.sort(Comparator.comparingInt(a -> a[0]));
