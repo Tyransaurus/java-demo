@@ -43,7 +43,7 @@ public class ChallengeService
         return new StringBuilder(s).reverse().toString();
     }
 
-    // Valid Parentheses: O(n) stack
+    // Valid Parentheses: Checks if a string has matching brackets
     public boolean validParentheses(String s) {
         if (s == null) return false;
         Map<Character, Character> map = Map.of(')', '(', ']', '[', '}', '{');
@@ -57,7 +57,7 @@ public class ChallengeService
         return st.isEmpty();
     }
 
-    // Group Anagrams: O(n * k log k)
+    // Group Anagrams: groups words that are anagrams
     public List<List<String>> groupAnagrams(List<String> words) {
         Map<String, List<String>> buckets = new HashMap<>();
         for (String w : words) {
@@ -69,7 +69,7 @@ public class ChallengeService
         return new ArrayList<>(buckets.values());
     }
 
-    // Longest Substring Without Repeating Characters: O(n) sliding window
+    // Longest Substring Without Repeating Characters
     public int lengthOfLongestSubstring(String s) {
         Map<Character, Integer> last = new HashMap<>();
         int left = 0, best = 0;
