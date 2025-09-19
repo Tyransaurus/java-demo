@@ -13,19 +13,22 @@ import org.springframework.http.ResponseEntity;
 
     private final S3StorageService s3;
 
-    @Value("${app.s3.bucket}") private String bucket;
+    @Value("${app.s3.bucket}") 
+    private String bucket;
 
     public S3Controller(S3StorageService s3) {
         this.s3 = s3;
     }
 
-    @GetMapping("/s3") public String view(Model model) {
+    @GetMapping("/s3") 
+    public String view(Model model) {
         model.addAttribute("page", "s3");
         model.addAttribute("objects", s3.listObjects(bucket));
         return "s3";
     }
 
-    @PostMapping("/s3/upload") public String upload(@RequestParam("file") MultipartFile file, Model model) {
+    @PostMapping("/s3/upload") 
+    public String upload(@RequestParam("file") MultipartFile file, Model model) {
         try {
             if (file.isEmpty()) {
                 model.addAttribute("message", "Please choose a file.");
@@ -47,9 +50,12 @@ import org.springframework.http.ResponseEntity;
         return "s3";
     }
 
-    @GetMapping("/s3/download") public ResponseEntity < byte[] > download(@RequestParam("key") String key) {
+    @GetMapping("/s3/download") 
+    public ResponseEntity < byte[] > download(@RequestParam("key") String key) {
         byte[] data = s3.getBytes(bucket, key);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + key + "\"")
             .contentType(MediaType.APPLICATION_OCTET_STREAM).body(data);
     }
+
+    
 }

@@ -9,11 +9,7 @@
 <body>
 
   <!-- Navigation -->
-  <header class="nav">
-    <a th:href="@{/}" th:classappend="${page}=='home' ? ' active'">Home</a>
-    <a th:href="@{/challenges}" th:classappend="${page}=='challenges' ? ' active'">Challenges</a>
-    <a th:href="@{/s3}" th:classappend="${page}=='s3' ? ' active'">S3</a>
-  </header>
+<div th:replace="_fragments :: header(${page})"></div>
 
   <main class="container">
     <div class="card">
@@ -30,7 +26,7 @@
           <input type="hidden" name="reverseStringResult" th:value="${reverseStringResult}">
           <button class="btn" style="flex:0">Solve</button>
         </form>
-        <div class="alert" th:text="${twoSumResult}"></div>
+        <div class="alert" th:utext="${twoSumResult}"></div>
       </section>
 
       <!-- Reverse String -->
@@ -50,9 +46,7 @@
     </div>
   </main>
 
-  <footer>
-    <small>© 2025 DJ • Spring Boot + AWS S3 Demo</small>
-  </footer>
+<div th:replace="_fragments :: footer"></div>
 
 </body>
 </html>

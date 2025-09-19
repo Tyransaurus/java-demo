@@ -1,12 +1,14 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-  <header class="nav">
+  <header th:fragment="header(page)" class="nav">
     <a th:href="@{/}" th:classappend="${page}=='home' ? ' active'">Home</a>
     <a th:href="@{/challenges}" th:classappend="${page}=='challenges' ? ' active'">Challenges</a>
     <a th:href="@{/s3}" th:classappend="${page}=='s3' ? ' active'">S3</a>
+    <a th:href="@{/etl}" th:classappend="${page}=='etl' ? ' active'">ETL</a>
   </header>
-  <footer>
+
+  <footer th:fragment="footer">
     <small>© 2025 DJ • Spring Boot + AWS S3 Demo</small>
   </footer>
 </body>

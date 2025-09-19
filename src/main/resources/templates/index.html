@@ -1,19 +1,17 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title th:text="${title}">Java Demo</title>
   <link rel="stylesheet" href="/css/styles.css">
 </head>
+
 <body>
 
   <!-- Navigation -->
-  <header class="nav">
-    <a th:href="@{/}" th:classappend="${page}=='home' ? ' active'">Home</a>
-    <a th:href="@{/challenges}" th:classappend="${page}=='challenges' ? ' active'">Challenges</a>
-    <a th:href="@{/s3}" th:classappend="${page}=='s3' ? ' active'">S3</a>
-  </header>
+  <div th:replace="_fragments :: header(${page})"></div>
 
   <!-- Main content -->
   <main class="container">
@@ -21,7 +19,8 @@
       <h1 class="h1 text-center" th:text="${title}">Java Demo</h1>
       <p class="muted text-center" th:text="${message}">Default message</p>
 
-      <h3 class="text-center">Banner (This banner is controlled by a text file in S3 and you can retroactively update it.)</h3>
+      <h3 class="text-center">Banner (This banner is controlled by a text file in S3 and you can retroactively update
+        it.)</h3>
       <p class="text-center"><strong th:text="${banner}">Default banner</strong></p>
 
       <div class="row">
@@ -37,9 +36,8 @@
   </main>
 
   <!-- Footer -->
-  <footer>
-    <small>© 2025 DJ • Spring Boot + AWS S3 Demo</small>
-  </footer>
+  <div th:replace="_fragments :: footer"></div>
 
 </body>
+
 </html>
