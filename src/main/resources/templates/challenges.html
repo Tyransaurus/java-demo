@@ -1,106 +1,101 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Coding Challenges</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Challenges</title>
   <link rel="stylesheet" href="/css/styles.css">
 </head>
-
 <body>
 
-  <!-- Navigation -->
-  <div th:replace="_fragments :: header(${page})"></div>
+<div th:replace="_fragments :: header(${page})"></div>
 
-  <main class="container">
-    <div class="card">
-      <h1 class="h1">Coding Challenges</h1>
+<main class="container">
 
-      <!-- Two Sum -->
-      <section class="card">
-        <h3>Two Sum</h3>
-        <p class="muted">Finds the first pair of numbers that sum to the target.</p>
-        <form action="/challenges/two-sum" method="post" class="row">
-          <input class="input" name="numbers" type="text" placeholder="e.g., 1,2,3,4,5,6,8,9,10,11" required
-            style="flex:2">
-          <input class="input" name="target" type="number" placeholder="Target (e.g., 11)" required style="flex:1">
-          <!-- keep reverse result across requests -->
-          <input type="hidden" name="reverseStringResult" th:value="${reverseStringResult}">
-          <button class="btn" style="flex:0">Solve</button>
-        </form>
-        <div class="alert" th:utext="${twoSumResult}"></div>
-      </section>
+  <!-- Two Sum -->
+  <section class="card" id="twoSumSection">
+    <h3>Two Sum</h3>
+    <form class="row ajax" action="/challenges/two-sum" method="post" data-target="#twoSumResult" autocomplete="off">
+      <input class="input" type="text" name="numbers" placeholder="e.g. 1,2,3,4,5,6,7,8,9,10" required>
+      <input class="input" type="number" name="target" placeholder="Target" required>
+      <button class="btn">Compute</button>
+      <input type="hidden" name="fragment" value="true">
+    </form>
+    <div id="twoSumResult" th:fragment="twoSumResultFrag">
+      <div class="mt-2" th:utext="${vm.twoSumResult}"></div>
+    </div>
+  </section>
 
-      <!-- Reverse String -->
-      <section class="card">
-        <h3>Reverse String</h3>
-        <p class="muted">Reverses your input text.</p>
-        <form action="/challenges/reverse" method="post" class="row">
-          <input class="input" name="text" type="text" placeholder="Type text…" required style="flex:1">
-          <!-- keep two-sum result across requests -->
-          <input type="hidden" name="twoSumResult" th:value="${twoSumResult}">
-          <button class="btn" style="flex:0">Reverse</button>
-        </form>
-        <div class="alert" th:text="${reverseStringResult}"></div>
-      </section>
+  <!-- Reverse String -->
+  <section class="card" id="reverseSection">
+    <h3>Reverse String</h3>
+    <form class="row ajax" action="/challenges/reverse" method="post" data-target="#reverseResult" autocomplete="off">
+      <input class="input" type="text" name="text" placeholder="Type text..." required>
+      <button class="btn">Reverse</button>
+      <input type="hidden" name="fragment" value="true">
+    </form>
+    <div id="reverseResult" th:fragment="reverseResultFrag">
+      <div class="mt-2" th:text="${vm.reverseStringResult}"></div>
+    </div>
+  </section>
 
-      <section class="card">
-        <h3>Valid Parentheses</h3>
-        <form action="/challenges/valid-parentheses" method="post" class="row">
-          <input class="input" type="text" name="text" placeholder="e.g. {[()()]}" required>
-          <input type="hidden" name="twoSumResult" th:value="${twoSumResult}">
-          <input type="hidden" name="reverseStringResult" th:value="${reverseStringResult}">
-          <button class="btn">Check</button>
-        </form>
-        <div class="mt-2" th:text="${validParenthesesResult}"></div>
-      </section>
+  <!-- Valid Parentheses -->
+  <section class="card" id="vpSection">
+    <h3>Valid Parentheses</h3>
+    <form class="row ajax" action="/challenges/valid-parentheses" method="post" data-target="#vpResult">
+      <input class="input" type="text" name="text" placeholder="e.g. {[()()]}" required>
+      <button class="btn">Check</button>
+      <input type="hidden" name="fragment" value="true">
+    </form>
+    <div id="vpResult" th:fragment="validParensResultFrag">
+      <div class="mt-2" th:text="${vm.validParenthesesResult}"></div>
+    </div>
+  </section>
 
-      <!-- Group Anagrams -->
-      <section class="card">
-        <h3>Group Anagrams</h3>
-        <form action="/challenges/anagrams" method="post" class="row">
-          <input class="input" type="text" name="words" placeholder="tea eat ate tan nat bat" required>
-          <input type="hidden" name="twoSumResult" th:value="${twoSumResult}">
-          <input type="hidden" name="reverseStringResult" th:value="${reverseStringResult}">
-          <input type="hidden" name="validParenthesesResult" th:value="${validParenthesesResult}">
-          <button class="btn">Group</button>
-        </form>
-        <ul class="list" th:if="${anagramsResult}">
-          <li th:each="g : ${anagramsResult}">
-            <span th:text="${#strings.arrayJoin(g.toArray(), ', ')}">tea, eat</span>
-    </li>
-  </ul>
-</section>
+  <!-- Group Anagrams -->
+  <section class="card" id="anagramsSection">
+    <h3>Group Anagrams</h3>
+    <form class="row ajax" action="/challenges/anagrams" method="post" data-target="#anagramsResult">
+      <input class="input" type="text" name="words" placeholder="tea eat ate tan nat bat" required>
+      <button class="btn">Group</button>
+      <input type="hidden" name="fragment" value="true">
+    </form>
+    <div id="anagramsResult" th:fragment="anagramsResultFrag">
+      <ul class="list" th:if="${vm.anagramsResult}">
+        <li th:each="g : ${vm.anagramsResult}">
+          <span th:text="${#strings.arrayJoin(g.toArray(), ', ')}">tea, eat</span>
+        </li>
+      </ul>
+    </div>
+  </section>
 
-<!-- Longest Substring Without Repeating Characters -->
-<section class="card">
-  <h3>Longest Unique-Char Substring</h3>
-  <form action="/challenges/longest-substring" method="post" class="row">
-    <input class="input" type="text" name="text" placeholder="e.g. abcabcbb" required>
-    <input type="hidden" name="twoSumResult" th:value="${twoSumResult}">
-    <input type="hidden" name="reverseStringResult" th:value="${reverseStringResult}">
-    <input type="hidden" name="validParenthesesResult" th:value="${validParenthesesResult}">
-    <button class="btn">Compute</button>
-  </form>
-  <div class="mt-2" th:text="${longestSubstringResult}"></div>
-</section>
+  <!-- Longest Substring -->
+  <section class="card" id="lsSection">
+    <h3>Longest Unique-Char Substring</h3>
+    <form class="row ajax" action="/challenges/longest-substring" method="post" data-target="#lsResult">
+      <input class="input" type="text" name="text" placeholder="e.g. abcabcbb" required>
+      <button class="btn">Compute</button>
+      <input type="hidden" name="fragment" value="true">
+    </form>
+    <div id="lsResult" th:fragment="longestSubstringResultFrag">
+      <div class="mt-2" th:text="${vm.longestSubstringResult}"></div>
+    </div>
+  </section>
 
-<!-- Merge Intervals -->
-<section class="card">
-  <h3>Merge Intervals</h3>
-  <form action="/challenges/merge-intervals" method="post" class="row">
-    <input class="input" type="text" name="ranges" placeholder="e.g. 1-3,2-6,8-10,15-18" required>
-    <input type="hidden" name="twoSumResult" th:value="${twoSumResult}">
-    <input type="hidden" name="reverseStringResult" th:value="${reverseStringResult}">
-    <input type="hidden" name="validParenthesesResult" th:value="${validParenthesesResult}">
-    <input type="hidden" name="longestSubstringResult" th:value="${longestSubstringResult}">
-    <button class="btn">Merge</button>
-  </form>
-  <div class="mt-2" th:text="${mergeIntervalsResult}"></div>
-</section>
+  <!-- Merge Intervals -->
+  <section class="card" id="miSection">
+    <h3>Merge Intervals</h3>
+    <form class="row ajax" action="/challenges/merge-intervals" method="post" data-target="#miResult">
+      <input class="input" type="text" name="ranges" placeholder="1-3,2-6,8-10,15-18" required>
+      <button class="btn">Merge</button>
+      <input type="hidden" name="fragment" value="true">
+    </form>
+    <div id="miResult" th:fragment="mergeIntervalsResultFrag">
+      <div class="mt-2" th:text="${vm.mergeIntervalsResult}"></div>
+    </div>
+  </section>
 
-<section class="card">
+  <section class="card">
   <h3>Palindrome (Client-side JS)</h3>
   <div class="row">
     <input class="input" id="palInput" type="text" placeholder="e.g. A man, a plan, a canal: Panama">
@@ -118,11 +113,28 @@ function checkPal() {
 }
 </script>
 
-      <a href="/" class="btn secondary">← Back to Home</a>
-    </div>
-  </main>
+</main>
 
 <div th:replace="_fragments :: footer"></div>
+
+<!-- Tiny AJAX helper -->
+<script>
+document.addEventListener('submit', async (e) => {
+  const form = e.target;
+  if (!form.classList.contains('ajax')) return;
+  e.preventDefault();
+  const targetSel = form.getAttribute('data-target');
+  const targetEl = document.querySelector(targetSel);
+  const resp = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+  const html = await resp.text();
+  // Create a temp container to parse returned fragment
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html.trim();
+  // Replace the target content with the fragment body
+  const newFrag = tmp.firstElementChild || tmp;
+  targetEl.replaceWith(newFrag);
+});
+</script>
 
 </body>
 </html>
