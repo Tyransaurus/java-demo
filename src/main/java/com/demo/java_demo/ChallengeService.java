@@ -15,17 +15,26 @@ public class ChallengeService
      * @param target target sum.
      * @return A list containing the alphabetized list of the two numbers that finds the target.
      */
-    public List<Integer> twoSum(int [] nums, int target)
-    {
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < nums.length; i++)
-        {
-            int need = target - nums[i];
-            if (map.containsKey(need)) return List.of(map.get(need), i);
-            map.put(nums[i], i);
+    public List<String> twoSum(int[] nums, int target) {
+        List<String> results = new ArrayList<>();
+        Map<Integer, List<Integer>> seen = new HashMap<>(); // value -> list of indices where it appeared
+
+        for (int i = 0; i < nums.length; i++) {
+            int current = nums[i];
+            int need = target - current;
+
+            // If we've seen the complement, pair it with current
+            if (seen.containsKey(need)) {
+                for (int j : seen.get(need)) {
+                    results.add(need + ", " + current + " (" + j + ", " + i + ")");
+                }
+            }
+
+            // Add this index to the map for the current value
+            seen.computeIfAbsent(current, k -> new ArrayList<>()).add(i);
         }
 
-        return List.of();
+        return results;
     }
 
     // returns a string but reversed

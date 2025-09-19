@@ -4,8 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BannerService 
-{
+public class BannerService {
     private final S3StorageService s3;
 
     @Value("${app.s3.bucket}")
